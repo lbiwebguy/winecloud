@@ -25,14 +25,14 @@ const linking: LinkingOptions<RootStackParamList> = {
               ProfileScreen: 'notifications',
             },
           },
-          Profile: {
+          Events: {
             screens: {
-              ProfileScreen: 'profile',
+              EventsScreen: 'events',
             },
           },
         },
       },
-      Modal: 'modal',
+      ProfileScreen: 'profile',
       NotFound: '*',
     },
   },

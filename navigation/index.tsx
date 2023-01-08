@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
@@ -17,11 +17,11 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import EventsScreen from '../screens/EventsScreen';
 import {
   RootStackParamList,
   RootTabParamList,
@@ -63,7 +63,7 @@ function RootNavigator() {
         options={{ title: 'Oops!' }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name='Modal' component={ModalScreen} />
+        <Stack.Screen name='ProfileScreen' component={ProfileScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -82,6 +82,7 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName='Home'
       screenOptions={{
+        tabBarShowLabel: false,
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
@@ -94,12 +95,12 @@ function BottomTabNavigator() {
           ),
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('ProfileScreen')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name='info-circle'
+              <Ionicons
+                name='person-circle-outline'
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
@@ -111,22 +112,50 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name='Notifications'
         component={NotificationsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Notifications'>) => ({
           title: 'Notifications',
           tabBarIcon: ({ color }) => (
             <TabBarIcon name='notifications-outline' color={color} />
           ),
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('ProfileScreen')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <Ionicons
+                name='person-circle-outline'
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
       <BottomTab.Screen
-        name='Profile'
-        component={ProfileScreen}
-        options={{
-          title: 'Profile',
+        name='Events'
+        component={EventsScreen}
+        options={({ navigation }: RootTabScreenProps<'Events'>) => ({
+          title: 'Events',
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name='person-circle-outline' color={color} />
+            <MaterialIcons name='event-available' size={24} color={color} />
           ),
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('ProfileScreen')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <Ionicons
+                name='person-circle-outline'
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
     </BottomTab.Navigator>
   );
@@ -139,5 +168,5 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>['name'];
   color: string;
 }) {
-  return <Ionicons size={30} {...props} />;
+  return <Ionicons size={24} {...props} />;
 }

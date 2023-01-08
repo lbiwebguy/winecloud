@@ -4,8 +4,10 @@ export const WineCloudTheme = extendTheme({
   // default settings for each component!
   components: {
     Heading: {
-      baseStyle: {
-        color: '#fff',
+      baseStyle: ({ colorMode }: { colorMode: any }) => {
+        return {
+          color: colorMode === 'dark' ? 'white.100' : 'blue.200',
+        };
       },
     },
     Text: {

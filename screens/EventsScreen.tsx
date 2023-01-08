@@ -1,19 +1,11 @@
 import { RootTabScreenProps } from '../types';
-import {
-  Box,
-  Heading,
-  HStack,
-  Link,
-  Stack,
-  Text,
-  useColorMode,
-} from 'native-base';
+import { Box, Heading, HStack, Stack, Text } from 'native-base';
 
-export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
-  const { colorMode } = useColorMode();
+export default function EventsScreen({
+  navigation,
+}: RootTabScreenProps<'Events'>) {
   return (
     <Box alignItems='center'>
-      {colorMode}
       <Stack p='4' space={3}>
         <Stack space={2}>
           <Heading size='md' ml='-1'>
@@ -33,9 +25,9 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
             72 Bremen Ave, Egg Harbor City, NJ 08215
           </Text>
         </Stack>
-        <Link href='https://www.renaultwinery.com/' isExternal fontWeight='400'>
-          Website
-        </Link>
+        <Text fontWeight='400'>
+          https://www.renaultwinery.com/?utm_source=organic&utm_medium=social&utm_campaign=1seo_gmb
+        </Text>
         <HStack alignItems='center' space={4} justifyContent='space-between'>
           <HStack alignItems='center'>
             <Text
